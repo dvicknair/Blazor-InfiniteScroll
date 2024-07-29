@@ -1,0 +1,21 @@
+﻿@page "/"
+@using BlazorApp3
+
+<PageTitle>Home</PageTitle>
+
+<InfiniteScrolling ItemsProvider="GetItems">
+    <ItemTemplate Context="item">
+        <p>Item @item</p>
+    </ItemTemplate>
+    <LoadingTemplate>
+        <div>Loading...</div>
+    </LoadingTemplate>
+</InfiniteScrolling>
+
+@code {
+    async Task<IEnumerable<int>> GetItems(InfiniteScrollingItemsProviderRequest request)
+    {
+        await Task.Delay(1000); // Simulate async loading
+        return Enumerable.Range(request.StartIndex, 50);
+    }
+}
